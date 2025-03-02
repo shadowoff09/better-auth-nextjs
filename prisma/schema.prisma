@@ -9,7 +9,7 @@ generator client {
 }
 
 model User {
-  id            Int       @id @default(autoincrement())
+  id            String       @id @default(uuid())
   email         String    @unique
   name          String?
   emailVerified Boolean
@@ -30,7 +30,7 @@ model Session {
   updatedAt DateTime
   ipAddress String?
   userAgent String?
-  userId    Int
+  userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([token])
@@ -41,7 +41,7 @@ model Account {
   id                    String    @id
   accountId             String
   providerId            String
-  userId                Int
+  userId                String
   user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
